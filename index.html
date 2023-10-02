@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire LCN et Chèque</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        form {
+            margin: 20px 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulaire LCN et Chèque</h1>
+        <form id="lcnChequeForm">
+            <label for="lcnChequeContent">Contenu du Règlement LCN ou Chèque :</label>
+            <textarea id="lcnChequeContent" name="lcnChequeContent" required></textarea>
+            <br>
+            <button type="button" id="printButton">Imprimer</button>
+        </form>
+    </div>
+
+    <script>
+        // Fonction pour imprimer le contenu du formulaire
+        function printLCNCheque() {
+            const content = document.getElementById('lcnChequeContent').value;
+            const printWindow = window.open('', '', 'width=600,height=600');
+            printWindow.document.open();
+            printWindow.document.write('<html><head><title>Impression</title></head><body>');
+            printWindow.document.write('<pre>' + content + '</pre>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+            printWindow.close();
+        }
+
+        // Ajoutez un gestionnaire d'événements pour le bouton d'impression
+        const printButton = document.getElementById('printButton');
+        printButton.addEventListener('click', printLCNCheque);
+    </script>
+</body>
+</html>
